@@ -32,7 +32,7 @@ public class Solution {
         reader.close();
 
         while (in.ready())
-            words.addAll(Arrays.asList(in.readLine().split(" ")));
+                words.addAll(Arrays.asList(in.readLine().split(" ")));
         in.close();
 
         for(int i = 0; i < words.size(); i++)

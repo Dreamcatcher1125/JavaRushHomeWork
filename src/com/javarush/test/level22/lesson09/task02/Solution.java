@@ -7,7 +7,7 @@ import java.util.Map;
 Сформируйте часть запроса WHERE используя StringBuilder.
 Если значение null, то параметр не должен попадать в запрос.
 Пример:
-{"name", "Ivanov", "country", "Ukraine", "city", "Kiev", "age", null}
+{"name", "Ivanov", "country", "Ukraine", "city", "Kiev", "age", null}`~!
 Результат:
 "name = 'Ivanov' and country = 'Ukraine' and city = 'Kiev'"
 */
