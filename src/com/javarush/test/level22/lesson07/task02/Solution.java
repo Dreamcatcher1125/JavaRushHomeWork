@@ -9,7 +9,7 @@ package com.javarush.test.level22.lesson07.task02;
 public class Solution {
     public static void main(String[] args) {
         System.out.println(String.format(getFormattedString(), "JavaRush", "курс", "мне", "нравится"));
-        //должен быть вывод
+        //должен быть вывод                                        1         2       3         4
         //"МНЕ нравится курс JavaRush"
     }
 
