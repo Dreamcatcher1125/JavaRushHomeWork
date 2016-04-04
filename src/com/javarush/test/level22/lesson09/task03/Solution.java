@@ -36,6 +36,7 @@ public class Solution
             Collections.addAll(list, s);
         }
         reader.close();
+
         String[] words = new String[list.size()];
         words = list.toArray(words);
         StringBuilder result = getLine(words);
@@ -60,13 +61,15 @@ public class Solution
         {
             arrayList.add(s);
         }
+
         int neededCounter = arrayList.size();
-        StringBuilder resultBuilder = new StringBuilder();
+        StringBuilder resultBuilder;
+
         while (true)
         {
             int wordCounter = 0;
             ArrayList<String> temp = new ArrayList<>(arrayList);
-            Collections.shuffle(temp);
+            Collections.shuffle(temp); //перемешать объекты в temp
             StringBuilder tempBuilder = new StringBuilder();
             tempBuilder.append(arrayList.get(0));
             temp.remove(arrayList.get(0));

@@ -14,10 +14,13 @@ import java.util.Map;
 public class Solution
 {
 
-    public static StringBuilder getCondition(Map<String, String> params) {
+    public static StringBuilder getCondition(Map<String, String> params)
+    {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Map.Entry<String, String> entry : params.entrySet()) {
-            if (entry.getValue() != null) {
+        for (Map.Entry<String, String> entry : params.entrySet())
+        {
+            if (entry.getValue() != null)
+            {
                 if (stringBuilder.toString().equals(""))
                     stringBuilder.append(entry.getKey()).append(" = '").append(entry.getValue()).append("'");
                 else

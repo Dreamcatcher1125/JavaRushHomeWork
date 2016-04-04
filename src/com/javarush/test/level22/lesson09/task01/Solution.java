@@ -22,26 +22,30 @@ import java.util.List;
 о о
 тот тот
 */
-public class Solution {
+public class Solution
+{
     public static List<Pair> result = new LinkedList<>();
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException
+    {
         List<String> words = new ArrayList<>();
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         BufferedReader in = new BufferedReader(new FileReader(reader.readLine())); // D:/1.txt
         reader.close();
 
         while (in.ready())
-                words.addAll(Arrays.asList(in.readLine().split(" ")));
+        {
+            words.addAll(Arrays.asList(in.readLine().split(" ")));
+        }
         in.close();
 
-        for(int i = 0; i < words.size(); i++)
+        for (int i = 0; i < words.size(); i++)
         {
-            for(int j = 0; j < words.size();)
+            for (int j = 0; j < words.size(); )
             {
                 StringBuilder sb = new StringBuilder(words.get(i));
                 String reverse = sb.reverse().toString();
-                if(words.get(j).equals(reverse) && j != i)
+                if (words.get(j).equals(reverse) && j != i)
                 {
                     Pair pair = new Pair();
                     pair.first = words.get(j);
@@ -50,22 +54,24 @@ public class Solution {
                     words.remove(j);
                     words.remove(i);
                     j = 0;
-                }
-                else
+                } else
                     j++;
             }
         }
-        for (Pair pair : result) {
+        for (Pair pair : result)
+        {
             System.out.println(pair);
         }
     }
 
-    public static class Pair {
+    public static class Pair
+    {
         String first;
         String second;
 
         @Override
-        public String toString() {
+        public String toString()
+        {
             return first == null && second == null ? "" :
                     first == null && second != null ? second :
                             second == null && first != null ? first :
