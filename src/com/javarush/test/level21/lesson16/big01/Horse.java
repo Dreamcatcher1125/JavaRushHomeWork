@@ -45,14 +45,15 @@ public class Horse
 
     public void move()
     {
-        setDistance(getDistance() + getSpeed() * Math.random());;
+        setDistance(getDistance() + getSpeed() * Math.random());
+        ;
     }
 
     public void print()
     {
         int n = (int) Math.round(getDistance());
 
-        for (int i = 0; i < n ; i++)
+        for (int i = 0; i < n; i++)
         {
             System.out.print(".");
         }
