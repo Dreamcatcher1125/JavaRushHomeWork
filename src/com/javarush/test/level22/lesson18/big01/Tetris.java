@@ -3,7 +3,7 @@ package com.javarush.test.level22.lesson18.big01;
 import java.awt.event.KeyEvent;
 
 /**
- *  Класс Tetris - содержит основной функционал игры.
+ * Класс Tetris - содержит основной функционал игры.
  */
 public class Tetris
 {
@@ -36,8 +36,8 @@ public class Tetris
     }
 
     /**
-     *  Основной цикл программы.
-     *  Тут происходят все важные действия
+     * Основной цикл программы.
+     * Тут происходят все важные действия
      */
     public void run() throws Exception
     {
@@ -63,14 +63,14 @@ public class Tetris
                 //Если "стрелка влево" - сдвинуть фигурку влево
                 if (event.getKeyCode() == KeyEvent.VK_LEFT)
                     figure.left();
-                //Если "стрелка вправо" - сдвинуть фигурку вправо
-                else if (event.getKeyCode() ==  KeyEvent.VK_RIGHT)
+                    //Если "стрелка вправо" - сдвинуть фигурку вправо
+                else if (event.getKeyCode() == KeyEvent.VK_RIGHT)
                     figure.right();
-                //Если  код клавиши равен 12 ("цифра 5 на доп. клавиатуре") - повернуть фигурку
-                else if (event.getKeyCode() ==  12)
+                    //Если  код клавиши равен 12 ("цифра 5 на доп. клавиатуре") - повернуть фигурку
+                else if (event.getKeyCode() == 12)
                     figure.rotate();
-                //Если "пробел" - фигурка падает вниз на максимум
-                else if (event.getKeyCode() ==  KeyEvent.VK_SPACE)
+                    //Если "пробел" - фигурка падает вниз на максимум
+                else if (event.getKeyCode() == KeyEvent.VK_SPACE)
                     figure.downMaximum();
             }
 
@@ -119,6 +119,7 @@ public class Tetris
     }
 
     public static Tetris game;
+
     public static void main(String[] args) throws Exception
     {
         game = new Tetris(10, 20);

@@ -49,7 +49,7 @@ public class Field
     }
 
     /**
-     *  Метод устанавливает переданное значение(value) в ячейку матрицы с координатами (x,y)
+     * Метод устанавливает переданное значение(value) в ячейку матрицы с координатами (x,y)
      */
     public void setValue(int x, int y, int value)
     {
@@ -124,7 +124,7 @@ public class Field
         ArrayList<int[]> lines = new ArrayList<int[]>();
 
         //Копируем все непустые линии в список.
-        for (int i = 0; i <height; i++)
+        for (int i = 0; i < height; i++)
         {
             //подсчитываем количество единиц в строке - просто суммируем все ее значения
             int count = 0;
@@ -139,9 +139,9 @@ public class Field
         }
 
         //Добавляем недостающие строки в начало списка.
-        while (lines.size()<height)
+        while (lines.size() < height)
         {
-            lines.add(0,new int[width]);
+            lines.add(0, new int[width]);
         }
 
         //Преобразуем список обратно в матрицу
