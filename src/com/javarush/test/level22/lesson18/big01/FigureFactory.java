@@ -1,7 +1,6 @@
 package com.javarush.test.level22.lesson18.big01;
-
 /**
- * Класс FigureFactory отвечает за создание объектов-фигурок.
+ * Клсс FigureFactory отвечает за создание объектов-фигурок.
  */
 public class FigureFactory
 {
@@ -33,7 +32,6 @@ public class FigureFactory
             {1, 1, 1},                          //   X X X
             {0, 0, 0}}                          //
     };
-
     /**
      * Метод выбирает случайный шаблон и создает с ним новую фигурку.
      */
