@@ -122,6 +122,7 @@ public class Tetris
 
     public static void main(String[] args) throws Exception
     {
+
         game = new Tetris(10, 20);
         game.run();
     }
