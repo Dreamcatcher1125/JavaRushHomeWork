@@ -32,7 +32,7 @@ public class Solution
         BufferedReader reader = new BufferedReader(new FileReader(fileName));
         while (reader.ready())
         {
-            String[] s = reader.readLine().split("\\s");
+            String[] s = reader.readLine().split("\\s");  //символ пробела или табуляции
             Collections.addAll(list, s);
         }
         reader.close();
