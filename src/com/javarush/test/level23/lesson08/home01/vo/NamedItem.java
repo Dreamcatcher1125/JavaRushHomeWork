@@ -1,34 +1,42 @@
 package com.javarush.test.level23.lesson08.home01.vo;
 
-public class NamedItem {
+public class NamedItem
+{
     private int id;
     private String name;
     private String description;
 
-    public NamedItem() {
+    public NamedItem()
+    {
     }
 
-    public int getId() {
+    public int getId()
+    {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(int id)
+    {
         this.id = id;
     }
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
 
-    public String getDescription() {
+    public String getDescription()
+    {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(String description)
+    {
         this.description = description;
     }
 }
