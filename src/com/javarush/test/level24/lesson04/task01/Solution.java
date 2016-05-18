@@ -12,13 +12,13 @@ public class Solution
     {
         public Apt3Bedroom(Building building)
         {
-            building.super();
+            building.super();  // потому что конструктора нет, по дефолту, мы просто передаем явно ссылку building
         }
     }
 
     public class BigHall extends Solution.Building.Hall
     {
-        public BigHall(Building building, BigDecimal square)
+        public BigHall(Building building, BigDecimal square) // потому что у класса Hall есть конструктор и передав ссылку building, нужно передать еще square в конструктор
         {
             building.super(square);
         }
