@@ -25,14 +25,17 @@ public class Solution
         public MyThread(String secretKey)
         {
             this.secretKey = secretKey;
-            setUncaughtExceptionHandler(new MyUncaughtExceptionHandler());
+            setUncaughtExceptionHandler(new MyUncaughtExceptionHandler()); // У объекта типа Thread есть специальный метод – setUncaughtExceptionHandler.
+                                                                           // В него нужно предать объект, который реализует интерфейс Thread.UncaughtExceptionHandler
         }
 
         private class MyUncaughtExceptionHandler implements Thread.UncaughtExceptionHandler
         {
 
             @Override
-            public void uncaughtException(Thread t, Throwable e)
+            public void uncaughtException(Thread t, Throwable e)  //У этого интерфейса есть всего один метод uncaughtException(Thread t, Throwable e).
+                                                                  // Именно этот метод будет вызван у переданного объекта,
+                                                                  // если внутри метода run возникнет исключение, которое не будет захвачено.
             {
                 try
                 {
