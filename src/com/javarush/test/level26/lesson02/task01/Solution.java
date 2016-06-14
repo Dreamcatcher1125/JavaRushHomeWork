@@ -8,10 +8,8 @@ import java.util.Comparator;
 Вернуть отсортированный массив от минимального расстояния до максимального
 Если удаленность одинаковая у нескольких чисел, то выводить их в порядке возрастания
 */
-public class Solution
-{
-    public static Integer[] sort(Integer[] array)
-    {
+public class Solution {
+    public static Integer[] sort(Integer[] array) {
         Arrays.sort(array); // сортируем по возрастанию (по дефолту)
         final double median;
 
@@ -20,11 +18,9 @@ public class Solution
         else                      // если не четное количество
             median = array[array.length / 2];
 
-        Comparator<Integer> compareByMedian = new Comparator<Integer>()
-        {
+        Comparator<Integer> compareByMedian = new Comparator<Integer>() {
             @Override
-            public int compare(Integer o1, Integer o2)
-            {
+            public int compare(Integer o1, Integer o2) {
                 double value = Math.abs(o1 - median) - Math.abs(o2 - median); //удаленность от медианы
                 if (value == 0)
                     value = o1 - o2; // Если удаленность одинаковая у нескольких чисел, то выводить их в порядке возрастания
@@ -36,8 +32,7 @@ public class Solution
         return array;
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         Integer[] mass = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         System.out.println(Arrays.toString(sort(mass)));
     }
