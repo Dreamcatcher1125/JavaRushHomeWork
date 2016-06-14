@@ -17,8 +17,8 @@ public class Solution
 
         if (array.length % 2 == 0) // если четное количество в списке
             median = ((double) array[array.length / 2 - 1] + (double) array[array.length / 2]) / 2;
-        else
-            median = array[array.length / 2]; // если не четное количество
+        else                      // если не четное количество
+            median = array[array.length / 2];
 
         Comparator<Integer> compareByMedian = new Comparator<Integer>()
         {
