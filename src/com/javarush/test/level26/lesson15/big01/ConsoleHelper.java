@@ -92,4 +92,8 @@ public class ConsoleHelper {
         Matcher m = p.matcher(Name);
         return m.matches();
     }
+
+    public static void printExitMessage() {
+        ConsoleHelper.writeMessage("Terminated. Thank you for visiting JavaRush cash machine. Good luck.");
+    }
 }

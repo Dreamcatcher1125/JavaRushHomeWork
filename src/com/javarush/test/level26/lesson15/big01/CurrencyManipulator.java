@@ -35,4 +35,8 @@ public class CurrencyManipulator { // будет хранить всю инфо�
 
         return result;
     }
+
+    public boolean hasMoney() {
+        return denominations.size() != 0;
+    }
 }
