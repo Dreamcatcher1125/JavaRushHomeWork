@@ -6,7 +6,7 @@ import com.javarush.test.level26.lesson15.big01.Operation;
 import java.util.HashMap;
 import java.util.Map;
 
-public final class CommandExecutor {
+public class CommandExecutor {
     private static Map<Operation, Command> map = new HashMap<Operation, Command>();
 
     public CommandExecutor() {
