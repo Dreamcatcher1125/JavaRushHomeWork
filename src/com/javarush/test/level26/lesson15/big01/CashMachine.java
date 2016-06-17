@@ -9,11 +9,9 @@ import java.util.Locale;
 public class CashMachine {
     public static void main(String[] args) throws IOException {
         Locale.setDefault(Locale.ENGLISH);
-        try
-        {
+        try {
             Operation operation;
-            do
-            {
+            do {
                 ConsoleHelper.writeMessage("Пожалуйста выберите операцию:" + " \n" +
                         "INFO" + ": 1;\n" +
                         "DEPOSIT" + ": 2;\n" +
