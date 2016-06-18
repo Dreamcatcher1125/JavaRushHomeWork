@@ -32,14 +32,14 @@ public class ConsoleHelper {
 
     public static String askCurrencyCode() throws IOException {
         String test;
-        writeMessage("Введите код валюты:");
+        writeMessage("Введите код валюты (3 символа):");
         while (true)
         {
             test = readString();
             if (test.length() == 3)
                 break;
             else
-                writeMessage("Неверная комманда");
+                writeMessage("Неверная комманда, повторите.");
         }
         test = test.toUpperCase();
         return test;
@@ -61,12 +61,12 @@ public class ConsoleHelper {
             }
             catch (Exception e)
             {
-                writeMessage("Неверная комманда");
+                writeMessage("Неверная комманда, повторите.");
                 continue;
             }
             if (k <= 0 || l <= 0 || array.length > 2)
             {
-                writeMessage("Неверная комманда");
+                writeMessage("Неверная комманда, повторите.");
                 continue;
             }
             break;
