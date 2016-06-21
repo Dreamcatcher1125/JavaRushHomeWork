@@ -2,6 +2,7 @@ package com.javarush.test.level26.lesson15.big01.command;
 
 
 import com.javarush.test.level26.lesson15.big01.Operation;
+import com.javarush.test.level26.lesson15.big01.exception.InterruptOperationException;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -20,7 +21,7 @@ public class CommandExecutor {
         CommandExecutor.map.put(Operation.EXIT, new ExitCommand());
     }
 
-    public static final void execute(Operation operation) throws IOException {
+    public static final void execute(Operation operation) throws InterruptOperationException {
         map.get(operation).execute();
     }
 

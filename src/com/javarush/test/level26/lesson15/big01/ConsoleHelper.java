@@ -17,7 +17,7 @@ public class ConsoleHelper {
         System.out.println(message);
     }
 
-    public static String readString() throws IOException
+    public static String readString() throws InterruptOperationException
     {
         String s = "";
         try
@@ -30,7 +30,7 @@ public class ConsoleHelper {
         return s;
     }
 
-    public static String askCurrencyCode() throws IOException {
+    public static String askCurrencyCode() throws InterruptOperationException {
         String test;
         writeMessage("Введите код валюты (3 символа):");
         while (true)
@@ -45,7 +45,7 @@ public class ConsoleHelper {
         return test;
     }
 
-    public static String[] getValidTwoDigits(String currencyCode) throws IOException {
+    public static String[] getValidTwoDigits(String currencyCode) throws InterruptOperationException {
         String[] array;
         writeMessage("Введите 2 положительных числа:");
         while (true)
@@ -74,7 +74,7 @@ public class ConsoleHelper {
         return array;
     }
 
-    public static Operation askOperation() throws InterruptOperationException, IOException {
+    public static Operation askOperation() throws InterruptOperationException {
         while (true)
         {
             String line = readString();
