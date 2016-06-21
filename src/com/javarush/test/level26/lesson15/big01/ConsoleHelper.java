@@ -74,14 +74,15 @@ public class ConsoleHelper {
         return array;
     }
 
-    public static Operation askOperation() throws InterruptOperationException {
+    public static Operation askOperation() throws InterruptOperationException
+    {
         while (true)
         {
             String line = readString();
             if (checkWithRegExp(line))
                 return Operation.getAllowableOperationByOrdinal(Integer.parseInt(line));
             else
-                writeMessage("Неверная комманда");
+                writeMessage("Неверная комманда, повторите.");
         }
 
     }

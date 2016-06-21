@@ -3,20 +3,23 @@ package com.javarush.test.level26.lesson15.big01.command;
 import com.javarush.test.level26.lesson15.big01.ConsoleHelper;
 import com.javarush.test.level26.lesson15.big01.exception.InterruptOperationException;
 
-public class LoginCommand implements Command {
+class LoginCommand implements Command {
+
+    private final String number = "123456789012";
+    private final String pin = "1234";
+
     @Override
     public void execute() throws InterruptOperationException {
 
-        String validS1 = "123456789012";
-        String validS2 = "1234";
+
         ConsoleHelper.writeMessage("Logging in...");
         while (true) {
             ConsoleHelper.writeMessage("Please specify your credit card number and pin code or type 'EXIT' for exiting.");
-            String s1 = ConsoleHelper.readString();
-            String s2 = ConsoleHelper.readString();
+            String s1 = ConsoleHelper.readString().trim();
+            String s2 = ConsoleHelper.readString().trim();
 
-            if (validS1.equals(s1)) {
-                if (validS2.equals(s2))
+            if (number.equals(s1)) {
+                if (pin.equals(s2))
                     ConsoleHelper.writeMessage(String.format("Credit card [%s] is verified successfully!", s1));
                 else {
                     ConsoleHelper.writeMessage(String.format("Credit card [%s] is not verified.", s1));
