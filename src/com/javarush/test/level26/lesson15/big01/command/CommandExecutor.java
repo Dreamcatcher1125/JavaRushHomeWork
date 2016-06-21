@@ -15,10 +15,11 @@ public class CommandExecutor {
     }
 
     static {
-        CommandExecutor.map.put(Operation.DEPOSIT, new DepositCommand());
-        CommandExecutor.map.put(Operation.WITHDRAW, new WithdrawCommand());
-        CommandExecutor.map.put(Operation.INFO, new InfoCommand());
-        CommandExecutor.map.put(Operation.EXIT, new ExitCommand());
+        map.put(Operation.LOGIN, new LoginCommand());
+        map.put(Operation.DEPOSIT, new DepositCommand());
+        map.put(Operation.WITHDRAW, new WithdrawCommand());
+        map.put(Operation.INFO, new InfoCommand());
+        map.put(Operation.EXIT, new ExitCommand());
     }
 
     public static final void execute(Operation operation) throws InterruptOperationException {
