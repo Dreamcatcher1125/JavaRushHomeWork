@@ -23,6 +23,8 @@ public class ConsoleHelper {
         try
         {
             s = reader.readLine();
+            if (s.equalsIgnoreCase("EXIT"))
+                throw new InterruptOperationException();
         }
         catch (IOException ignored)
         {
