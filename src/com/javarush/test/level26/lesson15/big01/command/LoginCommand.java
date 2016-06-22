@@ -1,34 +1,38 @@
 package com.javarush.test.level26.lesson15.big01.command;
 
+import com.javarush.test.level26.lesson15.big01.CashMachine;
 import com.javarush.test.level26.lesson15.big01.ConsoleHelper;
 import com.javarush.test.level26.lesson15.big01.exception.InterruptOperationException;
 
+import java.util.ResourceBundle;
+
 class LoginCommand implements Command {
 
-    private final String number = "123456789012";
-    private final String pin = "1234";
+    private ResourceBundle validCreditCards = ResourceBundle.getBundle(CashMachine.RESOURCE_PATH + "verifiedCards");
+    private ResourceBundle res = ResourceBundle.getBundle(CashMachine.RESOURCE_PATH + "login_en");
 
     @Override
     public void execute() throws InterruptOperationException {
 
 
-        ConsoleHelper.writeMessage("Logging in...");
+        ConsoleHelper.writeMessage(res.getString("before"));
         while (true) {
-            ConsoleHelper.writeMessage("Please specify your credit card number and pin code or type 'EXIT' for exiting.");
+            ConsoleHelper.writeMessage(res.getString("specify.data"));
             String s1 = ConsoleHelper.readString();
             String s2 = ConsoleHelper.readString();
 
-            if (number.equals(s1)) {
-                if (pin.equals(s2))
-                    ConsoleHelper.writeMessage(String.format("Credit card [%s] is verified successfully!", s1));
+            if (validCreditCards.containsKey(s1))
+            {
+                if (validCreditCards.getString(s1).equals(s2))
+                    ConsoleHelper.writeMessage(String.format(res.getString("success.format"), s1));
                 else {
-                    ConsoleHelper.writeMessage(String.format("Credit card [%s] is not verified.", s1));
-                    ConsoleHelper.writeMessage("Please try again or type 'EXIT' for urgent exiting");
+                    ConsoleHelper.writeMessage(String.format(res.getString("not.verified.format"), s1));
+                    ConsoleHelper.writeMessage(res.getString("try.again.or.exit"));
                     continue;
                 }
             } else {
-                ConsoleHelper.writeMessage(String.format("Credit card [%s] is not verified.", s1));
-                ConsoleHelper.writeMessage("Please specify valid credit card number - 12 digits, pin code - 4 digits.");
+                ConsoleHelper.writeMessage(String.format(res.getString("not.verified.format"), s1));
+                ConsoleHelper.writeMessage(res.getString("try.again.with.details"));
                 continue;
             }
 

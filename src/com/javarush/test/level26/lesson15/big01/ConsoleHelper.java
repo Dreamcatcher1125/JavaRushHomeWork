@@ -5,43 +5,44 @@ import com.javarush.test.level26.lesson15.big01.exception.InterruptOperationExce
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ConsoleHelper {
+    private static ResourceBundle res = ResourceBundle.getBundle(CashMachine.RESOURCE_PATH + "common_en");
 
-    private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-
-    public static void writeMessage(String message){
+    public static void writeMessage(String message) {
         System.out.println(message);
     }
 
-    public static String readString() throws InterruptOperationException
-    {
-        String s = "";
-        try
-        {
-            s = reader.readLine();
-            if (s.equalsIgnoreCase("EXIT"))
+    public static void printExitMessage() {
+        ConsoleHelper.writeMessage(res.getString("the.end"));
+    }
+
+    public static String readString() throws InterruptOperationException {
+        String message = "";
+        try {
+            message = reader.readLine();
+            if (message.equalsIgnoreCase(res.getString("operation.EXIT")))
                 throw new InterruptOperationException();
+        } catch (IOException ignored) {
         }
-        catch (IOException ignored)
-        {
-        }
-        return s;
+        return message;
     }
 
     public static String askCurrencyCode() throws InterruptOperationException {
         String test;
-        writeMessage("Введите код валюты (3 символа):");
-        while (true)
-        {
+        writeMessage(res.getString("choose.currency.code"));
+        while (true) {
             test = readString();
             if (test.length() == 3)
                 break;
             else
-                writeMessage("Неверная комманда, повторите.");
+                writeMessage(res.getString("invalid.data"));
+
         }
         test = test.toUpperCase();
         return test;
@@ -49,26 +50,22 @@ public class ConsoleHelper {
 
     public static String[] getValidTwoDigits(String currencyCode) throws InterruptOperationException {
         String[] array;
-        writeMessage("Введите 2 положительных числа:");
-        while (true)
-        {
+        writeMessage(String.format(res.getString("choose.denomination.and.count.format"), currencyCode));
+
+        while (true) {
             String s = readString();
             array = s.split(" ");
             int k;
             int l;
-            try
-            {
+            try {
                 k = Integer.parseInt(array[0]);
                 l = Integer.parseInt(array[1]);
-            }
-            catch (Exception e)
-            {
-                writeMessage("Неверная комманда, повторите.");
+            } catch (Exception e) {
+                writeMessage(res.getString("invalid.data"));
                 continue;
             }
-            if (k <= 0 || l <= 0 || array.length > 2)
-            {
-                writeMessage("Неверная комманда, повторите.");
+            if (k <= 0 || l <= 0 || array.length > 2) {
+                writeMessage(res.getString("invalid.data"));
                 continue;
             }
             break;
@@ -76,27 +73,20 @@ public class ConsoleHelper {
         return array;
     }
 
-    public static Operation askOperation() throws InterruptOperationException
-    {
-        while (true)
-        {
+    public static Operation askOperation() throws InterruptOperationException {
+        while (true) {
             String line = readString();
             if (checkWithRegExp(line))
                 return Operation.getAllowableOperationByOrdinal(Integer.parseInt(line));
             else
-                writeMessage("Неверная комманда, повторите.");
+                writeMessage(res.getString("invalid.data"));
         }
 
     }
 
-    public static boolean checkWithRegExp(String Name)
-    {
+    public static boolean checkWithRegExp(String Name) {
         Pattern p = Pattern.compile("^[1-4]$");
         Matcher m = p.matcher(Name);
         return m.matches();
-    }
-
-    public static void printExitMessage() {
-        ConsoleHelper.writeMessage("Terminated. Thank you for visiting JavaRush cash machine. Good luck.");
     }
 }
