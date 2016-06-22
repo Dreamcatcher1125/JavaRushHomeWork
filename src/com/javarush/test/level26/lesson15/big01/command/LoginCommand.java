@@ -15,8 +15,8 @@ class LoginCommand implements Command {
         ConsoleHelper.writeMessage("Logging in...");
         while (true) {
             ConsoleHelper.writeMessage("Please specify your credit card number and pin code or type 'EXIT' for exiting.");
-            String s1 = ConsoleHelper.readString().trim();
-            String s2 = ConsoleHelper.readString().trim();
+            String s1 = ConsoleHelper.readString();
+            String s2 = ConsoleHelper.readString();
 
             if (number.equals(s1)) {
                 if (pin.equals(s2))

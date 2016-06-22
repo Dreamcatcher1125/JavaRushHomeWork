@@ -12,7 +12,6 @@ public final class CurrencyManipulatorFactory {
 
     public static CurrencyManipulator getManipulatorByCurrencyCode(String currencyCode) {
 
-
         CurrencyManipulator current;
 
         if (map.containsKey(currencyCode)) {
