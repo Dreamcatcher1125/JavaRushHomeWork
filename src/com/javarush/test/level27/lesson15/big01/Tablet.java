@@ -1,20 +1,19 @@
 package com.javarush.test.level27.lesson15.big01;
 
 
-      /* 5. У нас все завязано на работу с консолью. Однако, при возникновении исключений, наше приложение умрет.
-        Чтобы узнать причину - добавим в Tablet статический логгер java.util.logging.Logger, инициализированный именем класса.
-
-        6. В методе createOrder класса Tablet обработаем исключения ввода-вывода.
-        Запишем в лог "Console is unavailable.". Уровень лога - SEVERE - это самый серьезный уровень, мы не можем работать.*/
+      /* 5. Не забудьте сразу после создания заказа и вывода информации о нем в консоль (найдите это место в коде) сделать следующее:
+        5.1. Установить флаг setChanged()
+        5.2. Отправить обсерверу заказ notifyObservers(order);*/
 
 
 import com.javarush.test.level27.lesson15.big01.kitchen.Order;
 
 import java.io.IOException;
+import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Tablet {
+public class Tablet extends Observable{ // отправляет оповещение повару, создает заказы
     private final int number;
     final static Logger logger = Logger.getLogger(Tablet.class.getName());
 
@@ -27,6 +26,8 @@ public class Tablet {
         try {
             order = new Order(this);
             ConsoleHelper.writeMessage(order.toString());
+            setChanged();
+            notifyObservers(order);
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Console is unavailable.");
         }
