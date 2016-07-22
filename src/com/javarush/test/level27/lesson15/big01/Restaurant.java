@@ -12,9 +12,9 @@ Start cooking - Your order: [Soup] of Tablet{number=5}*/
 
 public class Restaurant {
     public static void main(String[] args) {
-        Cook cook = new Cook("Amigo");
-        Tablet tablet = new Tablet(5);
-        tablet.addObserver(cook);
+        Tablet tablet = new Tablet(5); // объект Observable
+        Cook cook = new Cook("Amigo"); // объект Observer
+        tablet.addObserver(cook); // Для объекта Observable добавляем свой объект Observer
         tablet.createOrder();
     }
 }
