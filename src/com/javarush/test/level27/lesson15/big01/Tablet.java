@@ -13,7 +13,7 @@ import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Tablet extends Observable{ // отправляет оповещение повару, создает заказы
+public class Tablet extends Observable { // отправляет оповещение повару, создает заказы
     private final int number;
     final static Logger logger = Logger.getLogger(Tablet.class.getName());
 
@@ -21,13 +21,13 @@ public class Tablet extends Observable{ // отправляет оповещен
         this.number = number;
     }
 
-    public void createOrder(){ // будет создавать заказ из тех блюд, которые выберет пользователь.
+    public void createOrder() { // будет создавать заказ из тех блюд, которые выберет пользователь.
         Order order = null;
         try {
             order = new Order(this);
             ConsoleHelper.writeMessage(order.toString());
-            setChanged();
-            notifyObservers(order);
+            setChanged(); // Установить флаг setChanged()
+            notifyObservers(order); // Отправить обсерверу заказ
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Console is unavailable.");
         }

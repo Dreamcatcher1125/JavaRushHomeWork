@@ -8,7 +8,7 @@ import com.javarush.test.level27.lesson15.big01.ConsoleHelper;
 import java.util.Observable;
 import java.util.Observer;
 
-public class Cook extends Observable implements Observer { // он будет готовит, он получает оповещение
+public class Cook implements Observer { // он будет готовит, он получает оповещение, он имплементит Observer
     private String name;
 
     public Cook(String name) {
@@ -29,10 +29,6 @@ public class Cook extends Observable implements Observer { // он будет г
     public void update(Observable o, Object arg) { // o - Tablet, arg - order
         Order order = (Order) arg;
         ConsoleHelper.writeMessage("Start cooking - " + order);
-        setChanged();
-        notifyObservers(order);
     }
-   /* Не забудьте сразу после создания заказа и вывода информации о нем в консоль (найдите это место в коде) сделать следующее:
-            5.1. Установить флаг setChanged()
-             5.2. Отправить обсерверу заказ notifyObservers(order);*/
+
 }

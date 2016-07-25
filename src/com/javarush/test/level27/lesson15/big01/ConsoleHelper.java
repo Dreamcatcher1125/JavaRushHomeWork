@@ -25,9 +25,9 @@ public class ConsoleHelper {
         String str;
         ConsoleHelper.writeMessage("Please chose your dish: " + Dish.allDishesToString() + ". Enter 'exit' for finish.");
 
-        while (true){
+        while (true) {
             str = readString();
-            if (str.equals("exit")){
+            if (str.equals("exit")) {
                 break;
             }
             try {
