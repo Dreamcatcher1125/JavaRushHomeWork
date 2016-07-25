@@ -1,11 +1,15 @@
 package com.javarush.test.level27.lesson15.big01;
 
 
-      /* 5. Не забудьте сразу после создания заказа и вывода информации о нем в консоль (найдите это место в коде) сделать следующее:
-        5.1. Установить флаг setChanged()
-        5.2. Отправить обсерверу заказ notifyObservers(order);*/
+      /*
+2.3. Если нет рекламных видео, которые можно показать посетителю, то бросить NoVideoAvailableException,
+которое перехватить в оптимальном месте (подумать, где это место) и с уровнем Level.INFO логировать фразу
+"No video is available for the order " + order
+*/
 
 
+import com.javarush.test.level27.lesson15.big01.ad.AdvertisementManager;
+import com.javarush.test.level27.lesson15.big01.ad.NoVideoAvailableException;
 import com.javarush.test.level27.lesson15.big01.kitchen.Order;
 
 import java.io.IOException;
@@ -25,11 +29,17 @@ public class Tablet extends Observable { // отправляет оповеще�
         Order order = null;
         try {
             order = new Order(this);
+            if (order.isEmpty()) return;
             ConsoleHelper.writeMessage(order.toString());
             setChanged(); // Установить флаг setChanged()
             notifyObservers(order); // Отправить обсерверу заказ
+
+            new AdvertisementManager(order.getTotalCookingTime() * 60).processVideos();
+
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Console is unavailable.");
+        } catch (NoVideoAvailableException e) {
+            logger.log(Level.INFO, "No video is available for the order " + order);
         }
     }
 

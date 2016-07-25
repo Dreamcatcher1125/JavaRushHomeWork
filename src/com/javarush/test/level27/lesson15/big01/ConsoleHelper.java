@@ -8,6 +8,12 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+        4. Запустим приложение и введем 'fff', 'Soup' и 'exit'. В итоге наш заказ - Your order: [Soup], а 'fff' проигнорировано.
+        Давай уведомим пользователя, что блюда 'fff' нет. Выведем аналогичную фразу
+        fff is not detected
+        */
+
 public class ConsoleHelper {
 
     private static final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -33,7 +39,7 @@ public class ConsoleHelper {
             try {
                 youOrder.add(Dish.valueOf(str));
             } catch (IllegalArgumentException e) {
-                ConsoleHelper.writeMessage("Incorrect choice. Please try again.");
+                ConsoleHelper.writeMessage(str + " is not detected");
             }
         }
         return youOrder;

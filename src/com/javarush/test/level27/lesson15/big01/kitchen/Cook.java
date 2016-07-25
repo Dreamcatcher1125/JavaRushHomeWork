@@ -8,7 +8,7 @@ import com.javarush.test.level27.lesson15.big01.ConsoleHelper;
 import java.util.Observable;
 import java.util.Observer;
 
-public class Cook implements Observer { // он будет готовит, он получает оповещение, он имплементит Observer
+public class Cook extends Observable implements Observer { // он будет готовит, он получает оповещение, он имплементит Observer
     private String name;
 
     public Cook(String name) {
@@ -20,15 +20,15 @@ public class Cook implements Observer { // он будет готовит, он 
         return this.name;
     }
 
-    /*3.    Метод void update(Observable observable, Object arg), который необходимо реализовать, принимает два параметра.
-            -observable - объект, который отправил нам значение
-            -arg - само значение, в нашем случае - это объект Order
-            На данном этапе мы сымитируем обработку и выведем в консоль "Start cooking - " + order*/
+/*2.4. Добавим нашему повару вывод в консоль этой информации. Пусть теперь выводится аналогичное сообщение:
+    Start cooking - Your order: [Soup, Juice, Water] of Tablet{number=5}, cooking time 23min*/
 
     @Override
     public void update(Observable o, Object arg) { // o - Tablet, arg - order
         Order order = (Order) arg;
-        ConsoleHelper.writeMessage("Start cooking - " + order);
+        ConsoleHelper.writeMessage("Start cooking - " + order + ", cooking time " + order.getTotalCookingTime() + "min");
+        setChanged();
+        notifyObservers(order);
     }
 
 }
