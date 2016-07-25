@@ -27,19 +27,22 @@ public class CookedOrderEventDataRow implements EventDataRow {
         this.currentDate = new Date();
     }
 
-    /*public Date getDate() {
+    @Override
+    public Date getDate() {
         return currentDate;
     }
 
+    @Override
     public int getTime() {
         return cookingTimeSeconds;
     }
 
-    public String getCookName() {
+   /* public String getCookName() {
         return cookName;
-    }
+    }*/
 
+    @Override
     public EventType getType() {
         return EventType.COOKED_ORDER;
-    }*/
+    }
 }

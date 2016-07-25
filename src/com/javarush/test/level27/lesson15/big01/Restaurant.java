@@ -4,14 +4,9 @@ import com.javarush.test.level27.lesson15.big01.kitchen.Cook;
 import com.javarush.test.level27.lesson15.big01.kitchen.Waitor;
 
 /*3.
-5. Пишем main.
-Для объекта Observable добавляем свой объект Observer. См. п.2 и описание паттерна в wikipedia
-Называем повара, имя не влияет на тесты. В моем варианте - это Amigo :)
+3. Чтобы можно было проверить результат, добавим в метод main вызов методов из п.2. в перечисленном порядке.
 
-Сверим выводы в консоль. Пример моего вывода:
-Your order: [Water] of Tablet{number=5}
-Start cooking - Your order: [Water] of Tablet{number=5}
-Your order: [Water] of Tablet{number=5} was cooked by Amigo
+Нам понадобятся еще некоторые методы.
 */
 
 public class Restaurant {
@@ -22,5 +17,11 @@ public class Restaurant {
         tablet.addObserver(cook); // Для объекта Observable добавляем свой объект Observer
         cook.addObserver(waitor); // Для объекта Observable добавляем свой объект Observer
         tablet.createOrder();
+
+        DirectorTablet directorTablet = new DirectorTablet();
+        directorTablet.printAdvertisementProfit();
+        directorTablet.printCookWorkloading();
+        directorTablet.printActiveVideoSet();
+        directorTablet.printArchivedVideoSet();
     }
 }

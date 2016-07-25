@@ -6,11 +6,7 @@ import java.io.IOException;
 import java.util.List;
 
 /*
-Наведем некоторые рюшечки:
-        3. Запустим приложение и сразу введем 'exit'. Вывод получился не очень красивым.
-        Сделайте так, что если в заказе нет блюд, то чтобы он не отправлялся повару. Найдите это место и реализуйте логику.
-        В классе Order создайте вспомогательный метод  boolean isEmpty(), который будет определять, есть ли какие либо блюда в заказе.
-        Подсказка: используйте одноименный метод
+Добавьте геттер для поля dishes в класс Order, используйте его при создании события.
 */
 
 public class Order {
@@ -34,10 +30,7 @@ public class Order {
     public boolean isEmpty(){
         return dishes.isEmpty();
     }
-    
-   /* 2.3. Выберите правильное место из п.2.1. и п.2.2. и добавьте метод int getTotalCookingTime(),
-    который посчитает суммарное время приготовления всех блюд в заказе.*/
-   
+
    public int getTotalCookingTime(){
        int totalTime = 0;
        for (Dish dish : dishes) {
@@ -45,4 +38,8 @@ public class Order {
        }
        return totalTime;
    }
+
+    public List<Dish> getDishes() {
+        return dishes;
+    }
 }

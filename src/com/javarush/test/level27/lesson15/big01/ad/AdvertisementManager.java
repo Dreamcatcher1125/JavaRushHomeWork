@@ -17,6 +17,8 @@ First Video is displaying... 50, 277
 */
 
 import com.javarush.test.level27.lesson15.big01.ConsoleHelper;
+import com.javarush.test.level27.lesson15.big01.statistic.StatisticManager;
+import com.javarush.test.level27.lesson15.big01.statistic.event.VideoSelectedEventDataRow;
 
 import java.util.*;
 
@@ -42,6 +44,20 @@ public class AdvertisementManager {
             }
         };
         Collections.sort(videos, comparator);
+
+        /* регистрируем событие перед выводом видео, принимает
+        optimalVideoSet - список видео-роликов, отобранных для показа
+        amount - сумма денег в копейках
+        totalDuration - общая продолжительность показа отобранных рекламных роликов*/
+        long sumAmount = 0;
+        int sumDuration = 0;
+        for (Advertisement a : videos)
+        {
+            sumAmount += a.getAmountPerOneDisplaying();
+            sumDuration += a.getDuration();
+        }
+        StatisticManager.getInstance().register(new VideoSelectedEventDataRow(videos, sumAmount, sumDuration));
+        // выводим видео
         for (Advertisement a : videos) {
             ConsoleHelper.writeMessage(String.format("%s is displaying... %d, %d", a.getName(), a.getAmountPerOneDisplaying(), a.getAmountPerOneDisplaying() * 1000 / a.getDuration()));
             a.revalidate();

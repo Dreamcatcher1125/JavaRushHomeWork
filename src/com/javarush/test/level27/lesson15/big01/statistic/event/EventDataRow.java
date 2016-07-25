@@ -1,5 +1,14 @@
 package com.javarush.test.level27.lesson15.big01.statistic.event;
-//является интерфейсом-маркером, т.к. не содержит методов, и по нему мы определяем, является ли переданный объект событием или нет.
+/*
+4. В EventDataRow создайте методы
+Date getDate(), реализация которого вернет дату создания записи
+int getTime(), реализация которого вернет время - продолжительность
+*/
+
+import java.util.Date;
 
 public interface EventDataRow {
+    EventType getType();
+    Date getDate();
+    int getTime();
 }
