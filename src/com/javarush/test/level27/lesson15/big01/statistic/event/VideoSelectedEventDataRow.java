@@ -6,10 +6,8 @@ import java.util.Date;
 import java.util.List;
 
 /*
-2.3. VideoSelectedEventDataRow(List<Advertisement> optimalVideoSet, long amount, int totalDuration)
-     optimalVideoSet - список видео-роликов, отобранных для показа
-     amount - сумма денег в копейках
-     totalDuration - общая продолжительность показа отобранных рекламных роликов
+1. В классе VideoSelectedEventDataRow создайте геттер для поля amount.
+
 */
 public class VideoSelectedEventDataRow  implements EventDataRow {
     private List<Advertisement> optimalVideoSet;
@@ -34,9 +32,9 @@ public class VideoSelectedEventDataRow  implements EventDataRow {
         return totalDuration;
     }
 
-    /*public long getAmount() {
+    public long getAmount() {
         return amount;
-    }*/
+    }
 
     @Override
     public EventType getType() {

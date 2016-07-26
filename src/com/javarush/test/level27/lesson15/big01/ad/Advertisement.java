@@ -33,13 +33,18 @@ public class Advertisement { // Рекламное объявление
         return amountPerOneDisplaying;
     }
 
-    public void revalidate(){
-        if(hits <= 0)
-            throw new UnsupportedOperationException();
-        hits --;
+    public void revalidate() throws UnsupportedOperationException{
+        if (hits <= 0) throw new UnsupportedOperationException();
+        hits--;
+        if (hits == 1) amountPerOneDisplaying += initialAmount % amountPerOneDisplaying;
+
     }
 
     public int getHits() {
         return hits;
+    }
+
+    public double getAmountPerSecond() {
+        return (double)amountPerOneDisplaying / duration;
     }
 }

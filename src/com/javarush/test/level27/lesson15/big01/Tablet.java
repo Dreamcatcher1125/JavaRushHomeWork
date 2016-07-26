@@ -16,6 +16,9 @@ import java.io.IOException;
 import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import com.javarush.test.level27.lesson15.big01.kitchen.TestOrder;
+import com.javarush.test.level27.lesson15.big01.statistic.StatisticEventManager;
+import com.javarush.test.level27.lesson15.big01.statistic.event.NoAvailableVideoEventDataRow;
 
 public class Tablet extends Observable { // отправляет оповещение повару, создает заказы
     private final int number;
@@ -26,20 +29,12 @@ public class Tablet extends Observable { // отправляет оповеще�
     }
 
     public void createOrder() { // будет создавать заказ из тех блюд, которые выберет пользователь.
-        Order order = null;
         try {
-            order = new Order(this);
-            if (order.isEmpty()) return;
-            ConsoleHelper.writeMessage(order.toString());
-            setChanged(); // Установить флаг setChanged()
-            notifyObservers(order); // Отправить обсерверу заказ
-
-            new AdvertisementManager(order.getTotalCookingTime() * 60).processVideos();
-
+            final Order newOrder = new Order(this);
+            insideOrder(newOrder);
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Console is unavailable.");
-        } catch (NoVideoAvailableException e) {
-            logger.log(Level.INFO, "No video is available for the order " + order);
+            return;
         }
     }
 
@@ -51,4 +46,29 @@ public class Tablet extends Observable { // отправляет оповеще�
     public String toString() {
         return "Tablet{number=" + number + "}";
     }
+
+
+    public void createTestOrder() {
+        try {
+            final Order newOrder = new TestOrder(this);
+            insideOrder(newOrder);
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Console is unavailable.");
+        }
+    }
+
+
+    private void insideOrder(Order newOrder) throws IOException {
+        if (newOrder.isEmpty()) return;
+        ConsoleHelper.writeMessage(newOrder.toString());
+        setChanged(); // Установить флаг setChanged()
+        notifyObservers(newOrder); // Отправить обсерверу заказ
+        try {
+            new AdvertisementManager(newOrder.getTotalCookingTime() * 60).processVideos();
+        } catch (NoVideoAvailableException e) {
+            StatisticEventManager.getInstance().register(new NoAvailableVideoEventDataRow(newOrder.getTotalCookingTime()*60));
+            logger.log(Level.INFO, "No video is available for the order " + newOrder);
+        }
+    }
 }
+

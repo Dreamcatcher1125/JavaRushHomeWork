@@ -4,7 +4,7 @@ package com.javarush.test.level27.lesson15.big01.kitchen;
  */
 
 import com.javarush.test.level27.lesson15.big01.ConsoleHelper;
-import com.javarush.test.level27.lesson15.big01.statistic.StatisticManager;
+import com.javarush.test.level27.lesson15.big01.statistic.StatisticEventManager;
 import com.javarush.test.level27.lesson15.big01.statistic.event.CookedOrderEventDataRow;
 
 import java.util.Observable;
@@ -28,7 +28,7 @@ public class Cook extends Observable implements Observer {
         ConsoleHelper.writeMessage("Start cooking - " + order + ", cooking time " + order.getTotalCookingTime() + "min");
 
         CookedOrderEventDataRow event = new CookedOrderEventDataRow(o.toString(), this.name, order.getTotalCookingTime() * 60, order.getDishes());
-        StatisticManager.getInstance().register(event);
+        StatisticEventManager.getInstance().register(event);
 
         setChanged();
         notifyObservers(order);

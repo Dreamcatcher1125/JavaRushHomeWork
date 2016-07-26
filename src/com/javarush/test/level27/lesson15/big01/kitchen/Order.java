@@ -6,16 +6,25 @@ import java.io.IOException;
 import java.util.List;
 
 /*
-Добавьте геттер для поля dishes в класс Order, используйте его при создании события.
+Подсказка:
+а) создай класс TestOrder - наследник Order - в пакете родителя.
+б) в классе Order создай protected метод initDishes(), в котором инициализируй dishes. Вызови этот метод в конструкторе
+в) сделай поле dishes protected
+г) переопредели initDishes в классе-наследние TestOrder. Сделай инициализацию случайным набором блюд.
+д) вместо создания объекта Order в методе createTestOrder() класса Tablet, создавай объект класса TestOrder.
+ Весть другой функционал метода createTestOrder оставь прежним
+
+3. Отрефакторь методы createTestOrder() и createOrder(): в одном из методов выдели код, который повторяется в обоих методах,
+и наждм Ctrl+Alt+M, введи любое имя метода и нажми ОК. IDEA предложит заменить этот код во втором методе, подтверди.
 */
 
 public class Order {
     private Tablet tablet;
-    private List<Dish> dishes;
+    protected List<Dish> dishes;
 
     public Order(Tablet tablet) throws IOException {
-        this.dishes = ConsoleHelper.getAllDishesForOrder();
         this.tablet = tablet;
+        initDishes();
     }
 
     @Override
@@ -41,5 +50,10 @@ public class Order {
 
     public List<Dish> getDishes() {
         return dishes;
+    }
+
+    protected void initDishes() throws IOException {
+        ConsoleHelper.writeMessage(Dish.allDishesToString());
+        dishes = ConsoleHelper.getAllDishesForOrder();
     }
 }

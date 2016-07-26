@@ -6,11 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 /*
-        2.1. CookedOrderEventDataRow(String tabletName, String cookName, int cookingTimeSeconds, List<Dish> cookingDishs)
-        где - tabletName - имя планшета, используйте tablet.toString()
-        cookName - имя повара
-        cookingTimeSeconds - время приготовления заказа в секундах
-        cookingDishs - список блюд для приготовления
+        В классе CookedOrderEventDataRow создайте геттер для поля cookName.
 */
 public class CookedOrderEventDataRow implements EventDataRow {
     private String tabletName;
@@ -37,9 +33,9 @@ public class CookedOrderEventDataRow implements EventDataRow {
         return cookingTimeSeconds;
     }
 
-   /* public String getCookName() {
+    public String getCookName() {
         return cookName;
-    }*/
+    }
 
     @Override
     public EventType getType() {
