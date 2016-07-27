@@ -1,6 +1,5 @@
 package com.javarush.test.level27.lesson15.big01.statistic;
 
-import com.javarush.test.level27.lesson15.big01.kitchen.Cook;
 import com.javarush.test.level27.lesson15.big01.statistic.event.CookedOrderEventDataRow;
 import com.javarush.test.level27.lesson15.big01.statistic.event.EventDataRow;
 import com.javarush.test.level27.lesson15.big01.statistic.event.EventType;
@@ -8,17 +7,14 @@ import com.javarush.test.level27.lesson15.big01.statistic.event.VideoSelectedEve
 
 import java.util.*;
 /*
-В StatisticEventManager создайте метод (придумать самостоятельно), который из хранилища достанет все данные,
-относящиеся к отображению рекламы, и посчитает общую прибыль за каждый день.
-Дополнительно добавьте вспомогательный метод в класс хранилища, чтобы доступиться к данным.
-4. В StatisticEventManager создайте метод (придумать самостоятельно), который из хранилища достанет все данные,
-относящиеся к работе повара, и посчитает общую продолжительность работы для каждого покара отдельно.
+7. Из класса StatisticEventManager удали сет поваров, его геттер и метод register(Cook cook)
 */
 
 public class StatisticEventManager {
     private static StatisticEventManager instance = new StatisticEventManager();
     private StatisticStorage storage = new StatisticStorage();
-    private static Set<Cook> setCook = new HashSet<>();
+
+
 
     public static StatisticEventManager getInstance() {
         if (instance == null) {
@@ -34,9 +30,6 @@ public class StatisticEventManager {
         storage.put(data);
     }
 
-    public void register(Cook cook) {
-        setCook.add(cook);
-    }
 
     private static final int[] TIME_FIELDS =
             {
@@ -87,6 +80,7 @@ public class StatisticEventManager {
         }
         return result;
     }
+
 
     private static class StatisticStorage {
         private Map<EventType, List<EventDataRow>> eventMapStorage = new HashMap<>();

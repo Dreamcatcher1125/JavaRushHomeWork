@@ -1,37 +1,79 @@
 package com.javarush.test.level27.lesson15.big01.kitchen;
 
-/*. 4. Зарегистрируйте событие для повара во время приготовления еды..
- */
+/*
+Сделай класс Cook - таском(Runnable). Перенеси логику из трэда внутри конструктора OrderManager в метод run класса Cook
+*/
 
 import com.javarush.test.level27.lesson15.big01.ConsoleHelper;
+import com.javarush.test.level27.lesson15.big01.Tablet;
 import com.javarush.test.level27.lesson15.big01.statistic.StatisticEventManager;
 import com.javarush.test.level27.lesson15.big01.statistic.event.CookedOrderEventDataRow;
 
 import java.util.Observable;
-import java.util.Observer;
+import java.util.concurrent.LinkedBlockingQueue;
 
-public class Cook extends Observable implements Observer {
+public class Cook extends Observable implements Runnable {
     private String name;
+    private LinkedBlockingQueue<Order> queue;
+    private LinkedBlockingQueue<Order> deliveryQueue;
+    private volatile boolean busy;
 
     public Cook(String name) {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return this.name;
+    public boolean isBusy() {
+        return busy;
+    }
+
+    public void setQueue(LinkedBlockingQueue<Order> queue) {
+        this.queue = queue;
+    }
+
+    public void setDeliveryQueue(LinkedBlockingQueue<Order> deliveryQueue) {
+        this.deliveryQueue = deliveryQueue;
     }
 
     @Override
-    public void update(Observable o, Object arg) { // o - Tablet, arg - order
-        Order order = (Order) arg;
+    public void run() {
+        while (!Thread.currentThread().isInterrupted()) {
+            try {
+                startCookingOrder(queue.take());
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                return;
+            }
+        }
+    }
+
+    public void startCookingOrder(Order order) {
+        busy = true;
+
+        Tablet tablet = order.getTablet();
+
         ConsoleHelper.writeMessage("Start cooking - " + order + ", cooking time " + order.getTotalCookingTime() + "min");
+        try {
+            Thread.sleep(10 * order.getTotalCookingTime());
+        } catch (InterruptedException e) {
 
-        CookedOrderEventDataRow event = new CookedOrderEventDataRow(o.toString(), this.name, order.getTotalCookingTime() * 60, order.getDishes());
-        StatisticEventManager.getInstance().register(event);
+        }
+        //When finish cooking
+        StatisticEventManager.getInstance().register(new CookedOrderEventDataRow(tablet.toString(), this.toString(), order.getTotalCookingTime() * 60, order.getDishes()));
 
+        order.setCookedBy(this);
+        try {
+            deliveryQueue.put(order);
+        } catch (InterruptedException e) {
+        }
         setChanged();
         notifyObservers(order);
+        busy = false;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
 
 }

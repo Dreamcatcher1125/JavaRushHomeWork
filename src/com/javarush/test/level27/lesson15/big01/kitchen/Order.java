@@ -21,6 +21,7 @@ import java.util.List;
 public class Order {
     private Tablet tablet;
     protected List<Dish> dishes;
+    private Cook cookedBy;
 
     public Order(Tablet tablet) throws IOException {
         this.tablet = tablet;
@@ -55,5 +56,17 @@ public class Order {
     protected void initDishes() throws IOException {
         ConsoleHelper.writeMessage(Dish.allDishesToString());
         dishes = ConsoleHelper.getAllDishesForOrder();
+    }
+
+    public Tablet getTablet() {
+        return tablet;
+    }
+
+    public void setCookedBy(Cook cook) {
+        this.cookedBy = cookedBy;
+    }
+
+    public Cook getCookedBy() {
+        return cookedBy;
     }
 }

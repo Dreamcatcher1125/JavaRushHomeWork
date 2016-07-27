@@ -1,10 +1,10 @@
 package com.javarush.test.level27.lesson15.big01;
 
 
-      /*
-2.3. Если нет рекламных видео, которые можно показать посетителю, то бросить NoVideoAvailableException,
-которое перехватить в оптимальном месте (подумать, где это место) и с уровнем Level.INFO логировать фразу
-"No video is available for the order " + order
+/*
+3. Tablet - не должен быть Observable. Убери все зависимости.
+4. В Tablet создай сеттер и засеть ссылку на очередь (п.1) при создании планшета.
+5. В Tablet часть логики, которая уведомляет Observer-а, замени на такую, которая добавляет заказ в очередь.
 */
 
 
@@ -14,15 +14,17 @@ import com.javarush.test.level27.lesson15.big01.kitchen.Order;
 
 import java.io.IOException;
 import java.util.Observable;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.javarush.test.level27.lesson15.big01.kitchen.TestOrder;
 import com.javarush.test.level27.lesson15.big01.statistic.StatisticEventManager;
 import com.javarush.test.level27.lesson15.big01.statistic.event.NoAvailableVideoEventDataRow;
 
-public class Tablet extends Observable { // отправляет оповещение повару, создает заказы
+public class Tablet { 
     private final int number;
     final static Logger logger = Logger.getLogger(Tablet.class.getName());
+    private LinkedBlockingQueue<Order> queue;
 
     public Tablet(int number) {
         this.number = number;
@@ -61,14 +63,21 @@ public class Tablet extends Observable { // отправляет оповеще�
     private void insideOrder(Order newOrder) throws IOException {
         if (newOrder.isEmpty()) return;
         ConsoleHelper.writeMessage(newOrder.toString());
-        setChanged(); // Установить флаг setChanged()
-        notifyObservers(newOrder); // Отправить обсерверу заказ
+        try {
+            queue.put(newOrder);
+        } catch (InterruptedException e) {
+            return;
+        }
         try {
             new AdvertisementManager(newOrder.getTotalCookingTime() * 60).processVideos();
         } catch (NoVideoAvailableException e) {
             StatisticEventManager.getInstance().register(new NoAvailableVideoEventDataRow(newOrder.getTotalCookingTime()*60));
             logger.log(Level.INFO, "No video is available for the order " + newOrder);
         }
+    }
+
+    public void setQueue(LinkedBlockingQueue<Order> queue) {
+        this.queue = queue;
     }
 }
 
