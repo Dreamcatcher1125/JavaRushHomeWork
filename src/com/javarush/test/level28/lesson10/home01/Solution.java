@@ -28,7 +28,7 @@ public class Solution {
         start(characters);
     }
 
-    private static boolean isEveryoneReady = false;
+    private volatile static boolean isEveryoneReady = false; // тут вот принило без volatile, но с volatile - правильный вывод
 
     private static void start(List<Character> characters) throws InterruptedException {
         final Phaser phaser = new Phaser(1 + characters.size());
