@@ -11,7 +11,6 @@ getRandomLongBetween0AndN должен возвращать случайный l
 */
 public class Solution {
 
-
     public static int getRandomIntegerBetweenNumbers(int from, int to) {
         return ThreadLocalRandom.current().nextInt(from,to);
     }
