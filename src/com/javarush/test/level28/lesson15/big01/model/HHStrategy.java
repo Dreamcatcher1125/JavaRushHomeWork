@@ -15,7 +15,7 @@ public class HHStrategy implements Strategy {
 
     private static final String URL_FORMAT = "http://hh.ru/search/vacancy?text=java+%s&page=%d";
     private static final String userAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36";
-    private static final String referrer = "https://moikrug.ru";
+    private static final String referrer = "https://hh.ru";
 
     public List<Vacancy> getVacancies(String searchString) {
         List<Vacancy> vacancies = new ArrayList<>();
@@ -48,7 +48,7 @@ public class HHStrategy implements Strategy {
                     String companyName = element.select("[data-qa=vacancy-serp__vacancy-employer]").first().text();
 
                     // site
-                    String siteName = "http://hh.ru/";
+                    String siteName = referrer;
 
                     // url
                     String url = titleElement.attr("href");
@@ -68,7 +68,7 @@ public class HHStrategy implements Strategy {
         } catch (Exception e) {
 
         }
-
+        System.out.println("Vacancies from " + referrer + " are ready!");
         return vacancies;
     }
 

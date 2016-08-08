@@ -37,7 +37,7 @@ public class MoikrugStrategy implements Strategy {
                     vacancy.setTitle(element.getElementsByAttributeValue("class", "title").text());
                     vacancy.setCity(element.getElementsByAttributeValue("class", "location").text());
                     vacancy.setSalary(element.getElementsByAttributeValue("class", "salary").text());
-                    vacancy.setSiteName("https://moikrug.ru/");
+                    vacancy.setSiteName(referrer);
                     vacancy.setCompanyName(element.getElementsByAttributeValue("class", "company_name").first().child(0).text());
 
                     vacancies.add(vacancy);
@@ -45,7 +45,7 @@ public class MoikrugStrategy implements Strategy {
             }
         } catch (Exception e) {
         }
-
+        System.out.println("vacancies from " + referrer + " are ready!");
         return vacancies;
     }
 
