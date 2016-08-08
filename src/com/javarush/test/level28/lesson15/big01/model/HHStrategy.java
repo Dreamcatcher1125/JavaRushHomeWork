@@ -14,7 +14,8 @@ import org.jsoup.select.Elements;
 public class HHStrategy implements Strategy {
 
     private static final String URL_FORMAT = "http://hh.ru/search/vacancy?text=java+%s&page=%d";
-
+    private static final String userAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36";
+    private static final String referrer = "https://moikrug.ru";
 
     public List<Vacancy> getVacancies(String searchString) {
         List<Vacancy> vacancies = new ArrayList<>();
@@ -52,7 +53,6 @@ public class HHStrategy implements Strategy {
                     // url
                     String url = titleElement.attr("href");
 
-
                     // add vacancy to the list
                     Vacancy vacancy = new Vacancy();
                     vacancy.setTitle(title);
@@ -63,16 +63,6 @@ public class HHStrategy implements Strategy {
                     vacancy.setUrl(url);
                     vacancies.add(vacancy);
 
-                    /* проверка
-                    System.out.println("Title = " + title);
-                    System.out.println("Salary = " + salary);
-                    System.out.println("City = " + city);
-                    System.out.println("CompanyName = " + companyName);
-                    System.out.println("SiteName = " + siteName);
-                    System.out.println("URL = " + url);
-                    System.out.println();
-                    System.out.println();
-                    */
                 }
             }
         } catch (Exception e) {
@@ -86,8 +76,8 @@ public class HHStrategy implements Strategy {
 
         String url = String.format(URL_FORMAT, searchString, page);
         Document document = Jsoup.connect(url)
-                .userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
-                .referrer("none")
+                .userAgent(userAgent)
+                .referrer(referrer)
                 .get();
         return document;
     }

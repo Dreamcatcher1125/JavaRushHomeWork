@@ -16,7 +16,6 @@ public class MoikrugStrategy implements Strategy {
     private static final String userAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36";
     private static final String referrer = "https://moikrug.ru";
 
-
     @Override
     public List<Vacancy> getVacancies(String searchString) {
         List<Vacancy> vacancies = new ArrayList<>();
@@ -45,7 +44,6 @@ public class MoikrugStrategy implements Strategy {
                 }
             }
         } catch (Exception e) {
-
         }
 
         return vacancies;
