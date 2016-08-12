@@ -1,11 +1,29 @@
 package com.javarush.test.level29.lesson15.big01.car;
+/*
+12.1.	Объединение условных операторов.
+12.1.1.	Добавь внутренний метод, сообщающий, могут ли быть перевезены пассажиры
+boolean canPassengersBeTransferred() в класс Car. Метод должен возвращать true, если
+водитель доступен isDriverAvailable и есть топливо fuel.
+12.1.2.	Перепиши метод getNumberOfPassengersCanBeTransferred(), объединив условные
+операторы (используй метод canPassengersBeTransferred()).
+12.2.	Объединение дублирующихся фрагментов в условных операторах. Перепиши метод
+startMoving(), чтобы в нем не было повторяющихся вызовов функций.
+12.3.	Замена магического числа символьной константой. Замени магические числа в методе
+getMaxSpeed() на константные переменные метода: MAX_TRUCK_SPEED,
+MAX_SEDAN_SPEED и MAX_CABRIOLET_SPEED.
+12.4.	Замена условного оператора полиморфизмом.
+12.4.1.	Переопредели метод getMaxSpeed() в подклассах, избавившись от условного
+оператора.
+12.4.2.	Метод getMaxSpeed() в классе Car сделай абстрактным.
+*/
 
 import java.util.Date;
 
-public class Car {
+public abstract class Car {
     static public final int TRUCK = 0;
     static public final int SEDAN = 1;
     static public final int CABRIOLET = 2;
+
 
     double fuel;
 
@@ -18,35 +36,49 @@ public class Car {
     private boolean driverAvailable;
     private int numberOfPassengers;
 
-    public Car(int type, int numberOfPassengers) {
+    protected Car(int type, int numberOfPassengers) {
         this.type = type;
         this.numberOfPassengers = numberOfPassengers;
     }
 
-    public int fill(double numberOfLiters)
-    {
-        if (numberOfLiters < 0)
-            return -1;
+    public void fill(double numberOfLiters) throws Exception {
+
+        if (numberOfLiters < 0) {
+            throw new Exception();
+        }
         fuel += numberOfLiters;
-        return 0;
     }
 
-    public double getTripConsumption(Date date, int length, Date SummerStart, Date SummerEnd)
-    {
+    public double getTripConsumption(Date date, int length, Date SummerStart, Date SummerEnd) {
+
         double consumption;
-        if (date.before(SummerStart) || date.after(SummerEnd)) {
-            consumption = length * winterFuelConsumption + winterWarmingUp;
+
+        if (!isSummer(date, SummerStart, SummerEnd)) {
+            consumption = getWinterConsumption(length);
+        } else {
+            consumption = getSummerConsumption(length);
         }
-        else {
-            consumption = length * summerFuelConsumption;
-        }
+
         return consumption;
     }
 
+
+    public boolean isSummer(Date date, Date summerStart, Date summerEnd) {
+
+        return !(date.before(summerStart) || date.after(summerEnd));
+    }
+
+    public double getWinterConsumption(int length) {
+        return length * winterFuelConsumption + winterWarmingUp;
+    }
+
+    public double getSummerConsumption(int length) {
+        return length * summerFuelConsumption;
+    }
+
+
     public int getNumberOfPassengersCanBeTransferred() {
-        if (!isDriverAvailable())
-            return 0;
-        if (fuel <= 0)
+        if (!canPassengersBeTransferred())
             return 0;
 
         return numberOfPassengers;
@@ -56,17 +88,21 @@ public class Car {
         return driverAvailable;
     }
 
+    private boolean canPassengersBeTransferred() {
+        return (isDriverAvailable() && fuel > 0);
+    }
+
+
     public void setDriverAvailable(boolean driverAvailable) {
         this.driverAvailable = driverAvailable;
     }
 
     public void startMoving() {
+
         if (numberOfPassengers > 0) {
             fastenPassengersBelts();
-            fastenDriverBelt();
-        } else {
-            fastenDriverBelt();
         }
+        fastenDriverBelt();
     }
 
     public void fastenPassengersBelts() {
@@ -75,11 +111,20 @@ public class Car {
     public void fastenDriverBelt() {
     }
 
-    public int getMaxSpeed() {
-        if (type == TRUCK)
-            return 80;
-        if (type == SEDAN)
-            return 120;
-        return 90;
+    public abstract int getMaxSpeed();
+
+
+    public static Car create(int type, int numberOfPassengers) {
+        switch (type) {
+            case CABRIOLET:
+                return new Cabriolet(numberOfPassengers);
+            case SEDAN:
+                return new Sedan(numberOfPassengers);
+            case TRUCK:
+                return new Truck(numberOfPassengers);
+            default:
+                return null;
+        }
+
     }
 }

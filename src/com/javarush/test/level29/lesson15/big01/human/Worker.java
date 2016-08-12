@@ -1,14 +1,12 @@
 package com.javarush.test.level29.lesson15.big01.human;
 /*
-5.2.	Замена делегирования наследованием. Класс Worker должен наследоваться от Human, а
-не содержать его.
-5.3.	Переименование метода. Переименуй метод setSlr, чтобы было понятно сеттером чего
-является этот метод.
+9.3.	Инкапсуляция поля. Сокрой поле company в классе Worker. Добавь сеттер и геттер для
+него.
 */
 public class Worker extends Human implements Alive{
 
     private double salary;
-    public String company;
+    private String company;
 
     public Worker(String name, int age)
     {
@@ -25,5 +23,13 @@ public class Worker extends Human implements Alive{
 
     public void setSalary(double salary) {
         this.salary = salary;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
     }
 }
