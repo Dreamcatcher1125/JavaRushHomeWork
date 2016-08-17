@@ -14,6 +14,7 @@ public class Solution {
         int a = x % 2;
         int b = x / 2;
         String result = String.valueOf(a);
+        System.out.println(result);
         if (b > 0) {
             return binaryRepresentationMethod(b) + result;
         }
