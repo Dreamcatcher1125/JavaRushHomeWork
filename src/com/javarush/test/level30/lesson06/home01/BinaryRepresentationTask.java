@@ -19,7 +19,7 @@ public class BinaryRepresentationTask extends RecursiveTask {
             BinaryRepresentationTask task = new BinaryRepresentationTask(b);
             task.fork(); // производит асинхронный запуск задачи
             return task.join() // дожидается выполнения задачи и возвращает результат её выполнения
-                    + result;
+                    + result; // добавляем к стрингу
         }
         return result;
     }
